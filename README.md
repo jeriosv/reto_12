@@ -5,7 +5,7 @@ Métodos de Strings y ejercicios de procesamiento de archivo
 
 ## Métodos de strings en Python:
 
-- endswith: indica si la cadena termina con una subcadena determinada.
+- endswith: retorna True si la cadena termina con la subcadena especificada.
 
 Sintaxis: cadena.endswith("subcadena", inicio, fin)
 
@@ -16,15 +16,15 @@ print(cadena.endswith("aplicación")) #True
 print(cadena.endswith("mi")) #False
 ```
 
-- startswith: retorna True si la cadena inicia con la subcadena especificada. 
+- startswith: Retorna True si la cadena inicia con la subcadena especificada. 
 
-Sintaxis: cadena.startswith("subcadena", posicion_inicio, posicion_fin)
+Sintaxis: cadena.startswith("subcadena", inicio, fin)
 ```python
 cadena = "bienvenido a mi aplicación"
 print(cadena.startswith("bienvenido")) #True
 print(cadena.startswith("aplicación", 16, 26)) #True
 ```
-**- isalpha:** indica si la cadena es alfabética.
+- isalpha: Retorna True cuando los elementos de la cadena son letras (caracteres alfabéticos).
 
 Sintaxis: cadena.isalpha()
 ```python
@@ -37,7 +37,7 @@ print(cadena.isalpha()) #False
 cadena = "Amazonas y el Caribe" 
 print(cadena.isalpha()) #False
 ```
-**- isalnum:** indica si la cadena es alfanumérica.
+- isalnum: Retorna True cuando la cadena es alfanumérica.
 
 Sintaxis: cadena.isalnum()
 ```python
@@ -47,7 +47,7 @@ print(cadena.isalnum()) #True
 cadena = "20385"
 print(cadena.isalnum()) #True
 ```
-**- isdigit:** indica si la cadena es numérica.
+- isdigit: Retorna True cuando la cadena está compuesta por dígitos numéricos.
 
 Sintaxis: cadena.isdigit()
 ```python
@@ -60,7 +60,7 @@ print(numero.isdigit()) #False
 numero = "2.6"
 print(numero.isdigit()) #False
 ```
-**- isspace:** indica si la cadena está comformada por espacios.
+- isspace: Retorna True cuando todos los caracteres de la cadena son espacios.
 
 Sintaxis: cadena.isspace()
 ```python
@@ -73,7 +73,7 @@ print(string.isspace()) #False
 string = "Hola "
 print(string.isspace()) #False
 ```
-**- istitle:** indica si la cadena es un título, es decir que laprimera letra de la palabra es mayúscula y el resto son minúsculas.
+- istitle: Retorna True cuando todas las palabras de la cadena tienen su primera letra en mayúscula y el resto de las letras en minúscula. Este método solo revisa los caracteres del abecedario, es decir, ignora los símbolos, números y espacios.
 
 Sintaxis: cadena.istitle()
 ```python
@@ -86,7 +86,7 @@ print(string.istitle()) #False
 string = "Hola"
 print(string.istitle()) #True
 ```
-**- islower:** indica si la cadena está compuesta solo por letras minúsculas.
+- islower: Retorna True cuando todos los caracteres de la cadena están en minúsculas. Este método solo revisa los caracteres del abecedario, es decir, ignora los símbolos, números y espacios.
 
 Sintaxis: cadena.islower()
 ```python
@@ -100,8 +100,8 @@ string = "vida54"
 print(string.islower()) #True
 ```
 
-**- isupper:** indica si la cadena está compuesta solo por letras mayúsculas.
-
+- isupper: Retorna True cuando todos los caracteres de la cadena están en mayúsculas. Este método solo revisa los caracteres del abecedario, es decir, ignora los símbolos, números y espacios.
+  
 Sintaxis: cadena.isupper()
 ```python
 string = "CIEN AÑOS DE SOLEDAD"
@@ -113,42 +113,66 @@ print(string.isupper()) #True
 string = "HOLA8"
 print(string.isupper()) #True
 ```
-Consultado en https://uniwebsidad.com/libros/python/capitulo-6/metodos-de-validacion
 
-**2.** Procesar el [archivo] y extraer:
+
+## 2. Procesar el [archivo] y extraer:
 
 - Cantidad de vocales
 
   ```python
-  def numVocales(x: str)->int: #se define la función
-    letra = 0
-    for i in x: #se utiliza un ciclo for para recorrer el texto
-        if i.isalpha() and i in "aeiou" or i in "AEIOU": #como condicion se verifica que se tomen en cuenta solo las letras y que sean vocales
-            letra += 1 
-    return letra
+  def countVowels(text:str) -> int:
+    vowels = 0
+    for char in text:
+        if char in "AEIOUaeiou":
+            vowels += 1
+    return vowels
 
-
-  if __name__ == "__main__":
-    s = "mbox-short.txt" #se define una variable con el archivo a utilizar
-    with open(s, "r") as file: #se abre el archivo
-        vocales = numVocales(file.read())
-        print(f"Hay {vocales} vocales en el archivo.") #imprime el número de vocales
+    if __name__ == "__main__":
+    with open("mbox-short.txt", "r") as file:
+        print(f"There are {countVowels(file.read())} of vowels in the file.")
   ```
+
 - Cantidad de consonantes
 
   ```python
-  def numConsonantes(x: str)->int: #se define la función
-    letras = 0
-    for i in x: #se utiliza un ciclo for para recorrer el texto
-        if i.isalpha() and i not in "aeiou" and i not in "AEIOU": #como condicion se verifica que se tomen en cuenta solo las letras excluyendo las vocales
-            letras += 1
-    return letras
-
+  def countConsonants(text:str) -> int:
+    consonants = 0
+    for x in text:
+        if x.isalpha() and x not in "AEIOUaeiou":
+            consonants += 1
+    return consonants
 
   if __name__ == "__main__":
-    s ='brain.txt' #se define una variable con el archivo a utilizar
-    with open(s,"r") as file: #se abre el archivo
-        Consonantes = numConsonantes(file.read())
-        print(f"Hay {Consonantes} consonantes en el archivo.") #imprime el número de consonantes
+    with open("mbox-short.txt", "r") as file:
+        print(f"There are {countConsonants(file.read())} of consonants in the file.")
   ```
 - Listado de las 50 palabras que más se repiten
+
+  ```python
+  def countFiftyFrequentWords(text:str) -> list:
+    
+    words = text.split() # A list is created from the text, separing the words by whitespace or newline.
+    for i in range(len(words)): # A loop is made to delete characters that are not part of the actual word.
+        if not words[i].isalpha(): # If the word is not completely an alphabetic character then:
+            new = words[i].strip(",;.:-_") # Punctuation signs are deleted.
+            words.pop(i) # The word is replaced with the striped version.
+            words.insert(i, new)
+
+    # Create a dictionary with word as key an occurance as value.
+    ord_words = {}
+    for word in words:
+        if word in ord_words and word.isalpha():
+            ord_words[word] += 1
+        elif word not in ord_words and word.isalpha():
+            ord_words[word] = 1
+  
+    ord_words2 = [list(ord_words.items())[i][::-1] for i in range(len(ord_words))] # Reverse the set created by .items() so then it can be sorted by value.
+    freq_words = sorted(ord_words2, reverse=True)[:50] # Sort the fifty most frequent words.
+    words_50 = [freq_words[i][1] for i in range(len(freq_words))] # Creates a list with only the words.
+
+    return words_50
+
+  if __name__ == "__main__":
+    with open("mbox-short.txt", "r") as file:
+        print(*countFiftyFrequentWords(file.read()), sep='\n')
+  ```
