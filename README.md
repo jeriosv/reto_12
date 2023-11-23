@@ -1,7 +1,7 @@
 # Reto No. 12: "Ya casi vacaciones"
 Métodos de Strings y ejercicios de procesamiento de archivo
 
-## 1. Consulte que hacen los siguientes métodos de strings en python: endswith, startswith, isalpha, isalnum, isdigit, isspace, istitle, islower, isupper.
+### 1. Consulte que hacen los siguientes métodos de strings en python: endswith, startswith, isalpha, isalnum, isdigit, isspace, istitle, islower, isupper.
 
 ## Métodos de strings en Python:
 
@@ -97,64 +97,72 @@ print(texto.isupper())  # Devuelve False
 ```
 
 
-## 2. Procesar el [archivo] y extraer:
+### 2. Procesar el "mbox-short.txt" y extraer:
 
-- Cantidad de vocales
+- Cantidad de vocales:
+
+```python
+def contar_vocales(texto: str):   # Función que cuenta las vocales
+    vocales = 0                   # Inicializar el contador de vocales en 0
+    for letra in texto:           # Iterar sobre cada letra en el texto
+        if letra in "aeiouAEIOU": # Verificar si la letra está en el conjunto de vocales
+            vocales += 1          # Incrementar el contador de vocales
+    return vocales                # Retornar el total de vocales
+
+with open("mbox-short.txt", 'r') as file:  # Abrir el archivo "mbox-short.txt" en modo lectura
+    texto = file.read()   # Lee todo el contenido del archivo y lo guarda en la variable "texto"
+
+# Llama a la función contar_vocales con el contenido del archivo como argumento
+cantidad_vocales = contar_vocales(texto)
+
+# Imprimir la cantidad de vocales en el texto
+print("La cantidad de vocales en el texto es: " + str(cantidad_vocales))
+```
+
+- Cantidad de consonantes:
+
+```python
+def contar_consonantes(texto: str):  # Función que cuenta las consonantes
+    consonantes = 0                  # Inicializamos el contador de consonantes en 0
+    for letra in texto:              # Iterar sobre cada letra en el texto
+        if letra.isalpha() and letra not in "aeiouAEIOU": # Verificar si la letra es un carácter alfabético y no es una vocal
+            consonantes += 1         # Incrementar el contador de consonantes
+    return consonantes               # Retornar el total de consonantes
+
+with open("mbox-short.txt", 'r') as file:  # Abre el archivo "mbox-short.txt" en modo lectura
+    texto = file.read()   # Lee todo el contenido del archivo y lo guarda en la variable "texto"
+
+# Llama a la función contar_consonantes con el contenido del archivo como argumento
+cantidad_consonantes = contar_consonantes(texto)
+
+# Imprime la cantidad de consonantes en el texto
+print("La cantidad de consonantes en el texto es: " + str(cantidad_consonantes))
+```
+
+- Listado de las 50 palabras que más se repiten:
 
   ```python
-  def countVowels(text:str) -> int:
-    vowels = 0
-    for char in text:
-        if char in "AEIOUaeiou":
-            vowels += 1
-    return vowels
+  def palabras_repetidas(texto: str):  # Función que busca las palabras más repetidas en un texto
+    texto = texto.lower()            # Convertir todo el texto a minúsculas
 
-    if __name__ == "__main__":
-    with open("mbox-short.txt", "r") as file:
-        print(f"There are {countVowels(file.read())} of vowels in the file.")
-  ```
+    numero_de_palabras = {}          # Diccionario para almacenar el número de ocurrencias de cada palabra
 
-- Cantidad de consonantes
+    for s in texto:                  # Reemplazar los caracteres que no son letras ni espacios por espacios en blanco
+        if not s.isalpha() and s != " ":
+            texto = texto.replace(s, " ")
 
-  ```python
-  def countConsonants(text:str) -> int:
-    consonants = 0
-    for x in text:
-        if x.isalpha() and x not in "AEIOUaeiou":
-            consonants += 1
-    return consonants
+    archivo = texto.split()          # Dividir el texto en palabras individuales
 
-  if __name__ == "__main__":
-    with open("mbox-short.txt", "r") as file:
-        print(f"There are {countConsonants(file.read())} of consonants in the file.")
-  ```
-- Listado de las 50 palabras que más se repiten
+    for l in archivo:                # Contar el número de ocurrencias de cada palabra
+        if l not in numero_de_palabras:  # Si la palabra aún no está en el diccionario, la inicializamos en 0
+            numero_de_palabras[l] = 0
+        numero_de_palabras[l] += 1   # Incrementar el contador de ocurrencias de la palabra
 
-  ```python
-  def countFiftyFrequentWords(text:str) -> list:
-    
-    words = text.split() # A list is created from the text, separing the words by whitespace or newline.
-    for i in range(len(words)): # A loop is made to delete characters that are not part of the actual word.
-        if not words[i].isalpha(): # If the word is not completely an alphabetic character then:
-            new = words[i].strip(",;.:-_") # Punctuation signs are deleted.
-            words.pop(i) # The word is replaced with the striped version.
-            words.insert(i, new)
+    # Imprimimos las palabras más repetidas (hasta las 50 más repetidas)
+    for s in sorted(numero_de_palabras, reverse=True, key=lambda s: numero_de_palabras[s])[:51]:
+        print("La palabra: {} \tSe repite {} \tveces en el archivo".format(s, numero_de_palabras[s]))
 
-    # Create a dictionary with word as key an occurance as value.
-    ord_words = {}
-    for word in words:
-        if word in ord_words and word.isalpha():
-            ord_words[word] += 1
-        elif word not in ord_words and word.isalpha():
-            ord_words[word] = 1
-  
-    ord_words2 = [list(ord_words.items())[i][::-1] for i in range(len(ord_words))] # Reverse the set created by .items() so then it can be sorted by value.
-    freq_words = sorted(ord_words2, reverse=True)[:50] # Sort the fifty most frequent words.
-    words_50 = [freq_words[i][1] for i in range(len(freq_words))] # Creates a list with only the words.
-
-    return words_50
-
-  if __name__ == "__main__":
-    with open("mbox-short.txt", "r") as file:
-        print(*countFiftyFrequentWords(file.read()), sep='\n')
+  with open("mbox-short.txt", 'r') as file:   # Leer el contenido del archivo y lo guardamos en la variable "txt"
+    txt = file.read()
+    palabras_repetidas(txt)       # Llamar a la función palabras_repetidas pasando el contenido del archivo como argumento
   ```
