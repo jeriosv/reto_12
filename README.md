@@ -10,108 +10,90 @@ Métodos de Strings y ejercicios de procesamiento de archivo
 Sintaxis: cadena.endswith("subcadena", inicio, fin)
 
 ```python
-cadena = "bienvenido a mi aplicación" 
-print(cadena.endswith("mi", 13, 15)) #True
-print(cadena.endswith("aplicación")) #True
-print(cadena.endswith("mi")) #False
+texto = "Hola, ¿cómo estás?"
+print(texto.endswith("?"))  # Devuelve True
+print(texto.endswith("!"))  # Devuelve False
 ```
 
 - startswith: Retorna True si la cadena inicia con la subcadena especificada. 
 
 Sintaxis: cadena.startswith("subcadena", inicio, fin)
 ```python
-cadena = "bienvenido a mi aplicación"
-print(cadena.startswith("bienvenido")) #True
-print(cadena.startswith("aplicación", 16, 26)) #True
+texto = "Hola, ¿cómo estás?"
+print(texto.startswith("Hola"))  # Devuelve True
+print(texto.startswith("Adiós"))  # Devuelve False
 ```
 - isalpha: Retorna True cuando los elementos de la cadena son letras (caracteres alfabéticos).
 
 Sintaxis: cadena.isalpha()
 ```python
-cadena = "Amazonas" 
-print(cadena.isalpha()) #True
+texto = "Hola"
+print(texto.isalpha())  # Devuelve True
 
-cadena = "Amazonas en 2025" 
-print(cadena.isalpha()) #False
+texto = "Hola123"
+print(texto.isalpha())  # Devuelve False
 
-cadena = "Amazonas y el Caribe" 
-print(cadena.isalpha()) #False
 ```
 - isalnum: Retorna True cuando la cadena es alfanumérica.
 
 Sintaxis: cadena.isalnum()
 ```python
-cadena = "Amazonas2025" 
-print(cadena.isalnum()) #True
+texto = "Hola123"
+print(texto.isalnum())  # Devuelve True
 
-cadena = "20385"
-print(cadena.isalnum()) #True
+texto = "Hola!"
+print(texto.isalnum())  # Devuelve False
 ```
 - isdigit: Retorna True cuando la cadena está compuesta por dígitos numéricos.
 
 Sintaxis: cadena.isdigit()
 ```python
-numero = "1234"
-print(numero.isdigit()) #True
+texto = "123"
+print(texto.isdigit())  # Devuelve True
 
-numero = "23 50"
-print(numero.isdigit()) #False
-
-numero = "2.6"
-print(numero.isdigit()) #False
+texto = "Hola123"
+print(texto.isdigit())  # Devuelve False
 ```
 - isspace: Retorna True cuando todos los caracteres de la cadena son espacios.
 
 Sintaxis: cadena.isspace()
 ```python
-string = " "
-print(string.isspace()) #True
+texto = "   "
+print(texto.isspace())  # Devuelve True
 
-string = ""
-print(string.isspace()) #False
-
-string = "Hola "
-print(string.isspace()) #False
+texto = "Hola"
+print(texto.isspace())  # Devuelve False
 ```
 - istitle: Retorna True cuando todas las palabras de la cadena tienen su primera letra en mayúscula y el resto de las letras en minúscula. Este método solo revisa los caracteres del abecedario, es decir, ignora los símbolos, números y espacios.
 
 Sintaxis: cadena.istitle()
 ```python
-string = "Día Internacional"
-print(string.istitle()) #True
+texto = "Hola, ¿Cómo Estás?"
+print(texto.istitle())  # Devuelve True
 
-string = "Día internacional"
-print(string.istitle()) #False
-
-string = "Hola"
-print(string.istitle()) #True
+texto = "Hola, ¿Cómo estás?"
+print(texto.istitle())  # Devuelve False
 ```
 - islower: Retorna True cuando todos los caracteres de la cadena están en minúsculas. Este método solo revisa los caracteres del abecedario, es decir, ignora los símbolos, números y espacios.
 
 Sintaxis: cadena.islower()
 ```python
-string = "muerte y vida"
-print(string.islower()) #True
+texto = "hola"
+print(texto.islower())  # Devuelve True
 
-string = "Muerte y Vida"
-print(string.islower()) #False
-
-string = "vida54"
-print(string.islower()) #True
+texto = "Hola"
+print(texto.islower())  # Devuelve False
 ```
 
 - isupper: Retorna True cuando todos los caracteres de la cadena están en mayúsculas. Este método solo revisa los caracteres del abecedario, es decir, ignora los símbolos, números y espacios.
   
 Sintaxis: cadena.isupper()
 ```python
-string = "CIEN AÑOS DE SOLEDAD"
-print(string.isupper()) #True
+texto = "HOLA"
+print(texto.isupper())  # Devuelve True
 
-string = "CIENAÑOS"
-print(string.isupper()) #True
-
-string = "HOLA8"
-print(string.isupper()) #True
+texto = "Hola"
+print(texto.isupper())  # Devuelve False
 ```
 
 
